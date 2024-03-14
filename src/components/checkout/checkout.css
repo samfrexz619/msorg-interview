@@ -1,0 +1,15 @@
+.modal {
+  @apply w-full min-h-screen fixed inset-y-0 left-0 bg-[#F3F3F3] flex items-center justify-center
+}
+
+.modal__body {
+  @apply w-[894px] h-[682px] rounded-[32px] bg-white shadow-lg
+}
+
+.header {
+  border-bottom: 1px solid #FF6B00;
+}
+
+.card {
+  @apply w-full h-full items-center justify-center flex
+}

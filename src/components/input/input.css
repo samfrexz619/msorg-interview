@@ -1,0 +1,15 @@
+.input {
+  width: 100%;
+  border: 1px solid #1B1C1E;
+  border-radius: 12px;
+}
+
+.input input {
+  width: 100%;
+  outline: none;
+  border: none;
+}
+
+.input input::placeholder {
+  color: #1B1C1E;
+}
