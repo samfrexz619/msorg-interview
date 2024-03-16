@@ -16,13 +16,11 @@ const Checkout: React.FC<Props> = (props) => {
   const [inputs, setInputs] = useState({
     name: '',
     card_num: '',
-    password: '',
+    cvv: '',
     expiry: ''
   })
 
-  const [exp, setExp] = useState('')
-
-  const { name, card_num, password, expiry } = inputs;
+  const { name, card_num, cvv, expiry } = inputs;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = (e.target as HTMLInputElement).name
@@ -30,16 +28,41 @@ const Checkout: React.FC<Props> = (props) => {
     setInputs(values => ({ ...values, [name]: value }))
   }
 
-  const handleCvvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCardNum = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let input = e.target.value.replace(/\D/g, '')
+    if (input.length > 16) {
+      input = input.slice(0, 16)
+    }
+
+    const splitInput = input.match(/.{1,4}/g)
+
+    let spacedInput = ''
+
+    if (splitInput) {
+      spacedInput = splitInput.join(' ')
+    }
+
+    setInputs(values => ({ ...values, card_num: spacedInput }))
+  }
+
+  const handleExpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let input = e.target.value.replace(/\D/g, '')
 
     if (input.length > 2) {
       input = input.slice(0, 2) + '/' + input.slice(2, 4)
     }
-
-    setExp(input)
+    setInputs(values => ({ ...values, expiry: input }))
   }
 
+  const handleCvvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let input = e.target.value.replace(/\D/g, '')
+    setInputs(values => ({ ...values, cvv: input.slice(0, 3) }))
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log(name, card_num, cvv, expiry)
+  }
 
   return (
     <div className='modal'>
@@ -65,7 +88,7 @@ const Checkout: React.FC<Props> = (props) => {
               <TabPane title={<Card cardTitle={'Card Payment'} icon={'card'} />}>
                 <div className='w-full'>
                   <h3 className='text-center mb-10'>Enter your card details </h3>
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div>
                       <TextInput
                         label='Name on Card'
@@ -83,7 +106,7 @@ const Checkout: React.FC<Props> = (props) => {
                         placeholder='1234 5678 9123 1234'
                         inputId='cnum'
                         name='card_num'
-                        handleChange={handleChange}
+                        handleChange={handleCardNum}
                         value={card_num}
                         type='text'
                       />
@@ -93,21 +116,21 @@ const Checkout: React.FC<Props> = (props) => {
                         <TextInput
                           label='CVV'
                           placeholder='&#9679;&#9679;&#9679;'
-                          inputId='pwd'
-                          name='password'
-                          handleChange={handleChange}
-                          value={password}
-                          type='text'
+                          inputId='cvv'
+                          name='cvv'
+                          handleChange={handleCvvChange}
+                          value={cvv}
+                          type='password'
                         />
                       </div>
                       <div className=''>
                         <TextInput
                           label='Expiry'
                           placeholder='06/24'
-                          inputId='exp'
-                          name='exp'
-                          handleChange={handleCvvChange}
-                          value={exp}
+                          inputId='expiry'
+                          name='expiry'
+                          handleChange={handleExpChange}
+                          value={expiry}
                           type='text'
                         />
                       </div>

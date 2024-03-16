@@ -1,5 +1,4 @@
 import { ReactElement, useState } from 'react';
-
 import TabTitle, { Props as TabTitleProps } from './TabTitle';
 
 interface Props {
@@ -18,7 +17,7 @@ const TheTab = (props: Props): JSX.Element => {
         {
           children.map((child, index) => (
             <TabTitle
-              key={child.props.title}
+              key={index} //child.props.title
               title={child.props.title}
               index={index}
               isActive={index === selectedTabIndex}
