@@ -4,7 +4,9 @@ interface Props {
   title: ReactElement | string;
   children: ReactElement | ReactElement[]
 }
-const TabPane = ({ children }: Props): JSX.Element => <div className="">{children}</div>
+const TabPane = ({ children }: Props): JSX.Element => (
+  <div className="">{children}</div>
+)
 
 
 

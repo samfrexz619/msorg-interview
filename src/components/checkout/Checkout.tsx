@@ -20,6 +20,8 @@ const Checkout: React.FC<Props> = (props) => {
     expiry: ''
   })
 
+  const [exp, setExp] = useState('')
+
   const { name, card_num, password, expiry } = inputs;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,11 +30,21 @@ const Checkout: React.FC<Props> = (props) => {
     setInputs(values => ({ ...values, [name]: value }))
   }
 
+  const handleCvvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let input = e.target.value.replace(/\D/g, '')
+
+    if (input.length > 2) {
+      input = input.slice(0, 2) + '/' + input.slice(2, 4)
+    }
+
+    setExp(input)
+  }
+
 
   return (
     <div className='modal'>
       <div className='modal__body'>
-        <header className='w-full py-7 header'>
+        <header className='w-full py-3 header'>
           <div className='w-full flex justify-between px-[33px] items-center'>
             <p>Pay with</p>
             <a href="#" className='block text-center bg-[#D9D9D9] py-1 rounded-lg px-5'>
@@ -92,10 +104,10 @@ const Checkout: React.FC<Props> = (props) => {
                         <TextInput
                           label='Expiry'
                           placeholder='06/24'
-                          inputId='name'
-                          name='expiry'
-                          handleChange={handleChange}
-                          value={expiry}
+                          inputId='exp'
+                          name='exp'
+                          handleChange={handleCvvChange}
+                          value={exp}
                           type='text'
                         />
                       </div>

@@ -27,7 +27,7 @@ const TheTab = (props: Props): JSX.Element => {
           ))
         }
       </ul>
-      <div className='w-full bg-[#FFF8F2] rounded-[24px] p-7'>
+      <div className='w-full bg-[#FFF8F2] rounded-[24px] p-7 mb-4'>
         {children[selectedTabIndex]}
       </div>
     </div>

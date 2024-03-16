@@ -12,8 +12,9 @@ const TabTitle = (props: Props): JSX.Element => {
   const handleClick = useCallback(() => {
     setSelectedTab(index)
   }, [setSelectedTab, index])
+
   return (
-    <li className="mb-3">
+    <li className="mb-4">
       <button onClick={handleClick} className={`w-[150px] h-[96px] ${isActive ? 'bg-[#FF6B00] text-white' : 'bg-[#FFF8F2] text-[#1B1C1E]'} rounded-[10px]`}>
         {title}
       </button>
