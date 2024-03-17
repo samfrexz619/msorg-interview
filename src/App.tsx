@@ -1,6 +1,5 @@
-import { useState } from 'react'
-import './App.css'
 import Checkout from './components/checkout/Checkout'
+import './App.css'
 
 function App() {
 
