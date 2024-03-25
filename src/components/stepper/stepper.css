@@ -1,0 +1,55 @@
+.stepper {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.step-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+}
+
+.step-item:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  background: lightgrey;
+  width: 100%;
+  height: 3px;
+  transform: translateY(-50%);
+  /* right: 50%; */
+  right: 50%;
+  top: 33.33333%;
+}
+
+.step {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  background: #5C6C65;
+  /* border: 1px solid #5C6C65; */
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  color: #fff;
+  font-weight: 400;
+}
+
+.active .step {
+  background: #004A27;
+  transition: 0.5 ease;
+}
+
+.complete .step {
+  background: green;
+}
+
+.complete:not(:first-child)::before,
+.active:not(:first-child)::before {
+  background-color: green;
+}
